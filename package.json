@@ -1,7 +1,7 @@
 {
   "name": "back",
   "version": "1.0.0",
-  "description": "- POST ('users/register/'): Register a new user to the database\r - POST ('users/login/'): Login a user to the network, delivering a token\r - GET ('diary/'): Obtain a complete list of the user's entries\r - GET ('diary/?page=X?perPage=Y'): Obtain a Y entries, of X page number of the user's entries\r - GET ('diary/?startDate=X?endDate=Y'): Obtain entries between X and Y dates\r - GET ('diary/detail/:id'): Obtain detailed information of entry\r - POST ('diary/): Post new entry to database\r - DELETE ('diary/:id): Delete diary entry from database\r - PUT ('diary/:id): Edit diary entry from database\r - GET ('information/:pageid'): Get detailed information for pageId",
+  "description": "bonanza-app",
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll=false",
@@ -14,8 +14,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.26.0",
-    "@typescript-eslint/parser": "^5.26.0",
     "eslint": "^8.16.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
@@ -29,7 +27,6 @@
     "cors": "^2.8.5",
     "debug": "^4.3.4",
     "dotenv": "^16.0.1",
-    "eslint-config-airbnb-typescript": "^17.0.0",
     "express": "^4.18.1",
     "helmet": "^5.1.0",
     "jest": "^28.1.0",
