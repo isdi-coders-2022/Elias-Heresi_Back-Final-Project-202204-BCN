@@ -1,5 +1,5 @@
 require("dotenv").config();
-const debug = require("debug")("gamersland:server:middlewares:errors");
+const debug = require("debug")("bonanza:server:middlewares:errors");
 const chalk = require("chalk");
 const { customError } = require("../utils/customError");
 
