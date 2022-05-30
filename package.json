@@ -7,7 +7,8 @@
     "test": "jest --watchAll=false",
     "test-coverage": "npm run test -- --coverage --watchAll=false",
     "start": "node src",
-    "start-dev": "nodemon . -q"
+    "start-dev": "nodemon . -q",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,8 @@
     "eslint": "^8.16.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0"
+    "eslint-plugin-import": "^2.26.0",
+    "husky": "^7.0.0"
   },
   "dependencies": {
     "@types/jest": "^27.5.1",
