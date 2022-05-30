@@ -20,7 +20,7 @@ const loginUser = async (req, res) => {
     return;
   }
 
-  const token = jwt.sign({ id: user.username }, process.env.JWT_SECRET);
+  const token = jwt.sign({ id: user.username }, process.env.JWT_SECRET_USER);
   res.status(200).json({ token });
 };
 
