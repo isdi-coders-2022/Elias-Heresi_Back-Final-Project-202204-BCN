@@ -1,14 +1,37 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const debug = require("debug")("gamersland:server:controllers:userControllers");
 const User = require("../../database/models/User");
+
+const encryptPassword = (password) => bcrypt.hash(password, 10);
+
+const secret = "030d715845518298a37ac8fa80f966eb7349d5e2";
+
+const loginUser = async (req, res) => {
+  const username = req.body.username.toString();
+  const password = req.body.password.toString();
+  const user = await User.findOne({ username });
+  if (!user) {
+    res.status(403).json({ msg: "User not found" });
+    return;
+  }
+  const correctPassword = await bcrypt.compare(password, user.password);
+  if (!correctPassword) {
+    res.status(401).json({ msg: "Incorrect username and/or password" });
+    return;
+  }
+
+  const token = jwt.sign({ id: user.username }, secret);
+  res.status(200).json({ token });
+};
 
 const registerUser = async (req, res, next) => {
   const { name, surname, email, username, password } = req.body;
   try {
     const user = await User.findOne({ username });
     if (!user) {
-      const encryptedPassword = await bcrypt.hash(password, 10);
+      const encryptedPassword = await encryptPassword(password);
 
       const newUser = {
         name,
@@ -33,4 +56,4 @@ const registerUser = async (req, res, next) => {
   }
 };
 
-module.exports = { registerUser };
+module.exports = { registerUser, loginUser };
