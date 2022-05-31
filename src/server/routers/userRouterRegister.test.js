@@ -17,9 +17,9 @@ afterEach(async () => {
   await User.deleteMany({});
 });
 
-afterAll(() => {
-  mongoServer.stop();
-  mongoose.connection.close();
+afterAll(async () => {
+  await mongoServer.stop();
+  await mongoose.connection.close();
 });
 
 describe("Given a POST '/register' endpoint", () => {
