@@ -22,7 +22,10 @@ const loginUser = async (req, res) => {
     return;
   }
 
-  const token = jwt.sign({ id: user.username }, secret);
+  const token = jwt.sign(
+    { name: user.name, surname: user.surname, username: user.username },
+    secret
+  );
   res.status(200).json({ token });
 };
 
