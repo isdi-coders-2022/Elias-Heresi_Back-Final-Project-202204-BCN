@@ -16,7 +16,7 @@ const corsOptions = {
     "http://localhost:5000",
     "http://localhost:5001",
     "http://localhost:5002",
-    "https://bonanza-elias-heresi.onrender.com",
+    "https://bonanza-elias-heresi.netlify.app",
   ],
 };
 
