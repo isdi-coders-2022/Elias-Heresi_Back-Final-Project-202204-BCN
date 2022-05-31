@@ -1,8 +1,8 @@
 const request = require("supertest");
-const { MongoMemoryServer } = require("mongodb-memory-server");
 const mongoose = require("mongoose");
-
+const { MongoMemoryServer } = require("mongodb-memory-server");
 const app = require("..");
+
 const User = require("../../database/models/User");
 const connectDB = require("../../database");
 
@@ -11,7 +11,6 @@ let users;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
-
   await connectDB(mongoServer.getUri());
 });
 
@@ -24,9 +23,9 @@ afterEach(async () => {
   await User.deleteMany({});
 });
 
-afterAll(async () => {
-  await mongoServer.stop();
-  await mongoose.connection.close();
+afterAll(() => {
+  mongoServer.stop();
+  mongoose.connection.close();
 });
 
 describe("Given a POST '/login' endpoint", () => {
