@@ -6,6 +6,8 @@ const User = require("../../database/models/User");
 
 const encryptPassword = (password) => bcrypt.hash(password, 10);
 
+const secret = "030d715845518298a37ac8fa80f966eb7349d5e2";
+
 const loginUser = async (req, res) => {
   const username = req.body.username.toString();
   const password = req.body.password.toString();
@@ -20,7 +22,7 @@ const loginUser = async (req, res) => {
     return;
   }
 
-  const token = jwt.sign({ id: user.username }, process.env.JWT_SECRET_USER);
+  const token = jwt.sign({ id: user.username }, secret);
   res.status(200).json({ token });
 };
 
