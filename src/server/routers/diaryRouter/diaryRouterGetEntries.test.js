@@ -32,7 +32,11 @@ describe("Given a GET '/all' endpoint", () => {
       const response = await request(app)
         .get("/diary/all")
         .set("Authorization", `Bearer ${mockToken}`);
-      expect(response.body.diary).toBeDefined();
+
+      const searchedProperty = "commentary";
+      const searchedValue =
+        "Had a good day at the office. Excited on what is coming";
+      expect(response.body[0]).toHaveProperty(searchedProperty, searchedValue);
     });
   });
 });
