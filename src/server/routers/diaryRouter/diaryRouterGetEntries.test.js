@@ -1,10 +1,10 @@
 const request = require("supertest");
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
-const app = require("..");
-const { Diary } = require("../../database/models/Diary");
-const connectDB = require("../../database");
-const { mockDiary, mockToken } = require("../mocks/diary");
+const app = require("../..");
+const { Diary } = require("../../../database/models/Diary");
+const connectDB = require("../../../database");
+const { mockDiary, mockToken } = require("../../mocks/diary");
 
 let mongoServer;
 
