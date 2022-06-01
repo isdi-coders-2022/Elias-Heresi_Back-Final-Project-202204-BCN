@@ -13,7 +13,7 @@ const getEntries = async (req, res) => {
   }
 
   debug(`${response.username}'s entries obtained successfully`);
-  res.status(201).json(response.diary);
+  res.status(201).json({ diary: response.diary });
 };
 
 module.exports = { getEntries };
