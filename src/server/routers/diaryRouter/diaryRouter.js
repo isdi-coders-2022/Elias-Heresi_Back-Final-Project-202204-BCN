@@ -1,5 +1,5 @@
 const express = require("express");
-const { getEntries } = require("../controllers/diaryControllers");
+const { getEntries } = require("../../controllers/diaryControllers");
 
 const diaryRouter = express.Router();
 

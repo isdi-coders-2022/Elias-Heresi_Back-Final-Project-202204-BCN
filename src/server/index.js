@@ -3,8 +3,8 @@ const { default: helmet } = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
 const { notFoundError, generalError } = require("./middlewares/errors");
-const { userRouter } = require("./routers/userRouter");
-const { diaryRouter } = require("./routers/diaryRouter");
+const { userRouter } = require("./routers/userRouter/userRouter");
+const { diaryRouter } = require("./routers/diaryRouter/diaryRouter");
 const { auth } = require("./middlewares/auth");
 
 const corsOptions = {
