@@ -17,7 +17,9 @@
 
 - Users<br>
   `[ { username: string , password: string, name: string },... ]`
+- Entries<br>
+  `{date: string, positiveEmotion: number, engagement: number, relationships: number, meaning: number, accomplishments: number, vitality: number, wellBeing: number, commentary: string, image: string}`
 - Diaries<br>
-  `[ { username: string , diary: [{id: string, P: number, E: number, R: number, M: number, A: number, wellBeing: number, safety: number, commentary: string}, ...] },...]`
+  `[ { username: string , diary: [Entry, ...] },...]`
 - Content<br>
   `{home: string, p: string, e: string, r: string, m: string, a: string}`
