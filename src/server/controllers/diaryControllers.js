@@ -6,14 +6,14 @@ const getEntries = async (req, res) => {
   const {
     userId: { username },
   } = req;
-  const diary = await Diary.findOne({ username });
-  if (!diary) {
+  const response = await Diary.findOne({ username });
+  if (!response) {
     res.status(403).json({ msg: "User entries not found" });
     return;
   }
 
-  debug("All entries obtained successfully");
-  res.status(201).json(diary);
+  debug(`${response.username}'s entries obtained successfully`);
+  res.status(201).json(response.diary);
 };
 
 module.exports = { getEntries };
