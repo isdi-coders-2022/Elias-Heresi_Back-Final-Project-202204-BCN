@@ -4,6 +4,8 @@ const morgan = require("morgan");
 const cors = require("cors");
 const { notFoundError, generalError } = require("./middlewares/errors");
 const { userRouter } = require("./routers/userRouter");
+const { diaryRouter } = require("./routers/diaryRouter");
+const { auth } = require("./middlewares/auth");
 
 const corsOptions = {
   origin: [
@@ -28,6 +30,7 @@ app.use(express.json());
 app.use(helmet());
 
 app.use("/user", userRouter);
+app.use("/diary", auth, diaryRouter);
 
 app.use(notFoundError);
 app.use(generalError);
