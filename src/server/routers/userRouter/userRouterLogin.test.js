@@ -1,5 +1,4 @@
 const request = require("supertest");
-const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const app = require("../..");
@@ -95,8 +94,6 @@ describe("Given a POST '/login' endpoint", () => {
         username: "andrea82",
         password: "incorrect_password",
       };
-
-      // bcrypt.compare = jest.fn().mockReturnValue(false);
 
       const response = await request(app)
         .post("/user/login")
