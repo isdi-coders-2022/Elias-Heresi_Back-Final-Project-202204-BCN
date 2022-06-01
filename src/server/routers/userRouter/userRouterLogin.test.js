@@ -24,12 +24,12 @@ afterEach(async () => {
 });
 
 afterAll(async () => {
-  await mongoServer.stop();
+  mongoServer.stop();
   await mongoose.connection.close();
 });
 
 describe("Given a POST '/login' endpoint", () => {
-  describe("When it receives a request", () => {
+  describe("When it receives a valid request", () => {
     users = [
       {
         name: "test",
@@ -70,6 +70,38 @@ describe("Given a POST '/login' endpoint", () => {
         .send(userRequestReceived);
 
       expect(response.body.token).toBeDefined();
+    });
+  });
+  describe("When it receives a request with a non-existing user", () => {
+    test("Then an error with a 'User not found' message will be received", async () => {
+      const userRequestReceived = {
+        username: "no_existe",
+        password: "inexistente",
+      };
+
+      const response = await request(app)
+        .post("/user/login")
+        .send(userRequestReceived);
+
+      const expectedProperty = "msg";
+      const expectedMessage = "User not found";
+      expect(response.body).toHaveProperty(expectedProperty, expectedMessage);
+    });
+  });
+  describe("When it receives a request with an incorrect password", () => {
+    test("Then an error with a 'Incorrect username and/or password' message will be received", async () => {
+      const userRequestReceived = {
+        username: "andrea82",
+        password: "incorrect_password",
+      };
+
+      const response = await request(app)
+        .post("/user/login")
+        .send(userRequestReceived);
+
+      const expectedProperty = "msg";
+      const expectedMessage = "Incorrect username and/or password";
+      expect(response.body).toHaveProperty(expectedProperty, expectedMessage);
     });
   });
 });

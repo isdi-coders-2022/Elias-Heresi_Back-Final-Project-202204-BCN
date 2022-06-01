@@ -31,4 +31,21 @@ describe("Given the auth function", () => {
       expect(req).toHaveProperty("userId", mockId);
     });
   });
+  describe("When it receives a request with an invalid token", () => {
+    const req = {
+      headers: {
+        authorization: "NotBear",
+      },
+    };
+
+    test("Then an error with 'Invalid authentication' message will be thrown", () => {
+      const expectedMessage = "Invalid authentication";
+      const expectedError = new Error(expectedMessage);
+      const next = jest.fn();
+
+      auth(req, null, next);
+
+      expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
 });
