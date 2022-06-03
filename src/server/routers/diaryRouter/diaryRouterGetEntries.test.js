@@ -2,7 +2,7 @@ const request = require("supertest");
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const app = require("../..");
-const { Diary } = require("../../../database/models/Diary");
+const { Entry } = require("../../../database/models/Diary");
 const connectDB = require("../../../database");
 const { mockDiary, mockToken } = require("../../mocks/diary");
 
@@ -14,11 +14,11 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-  Diary.create(mockDiary);
+  Entry.create(mockDiary.diary[0]);
 });
 
 afterEach(async () => {
-  await Diary.deleteMany({});
+  await Entry.deleteMany({});
 });
 
 afterAll(async () => {
@@ -28,13 +28,15 @@ afterAll(async () => {
 
 describe("Given a GET '/all' endpoint", () => {
   describe("When it receives a request", () => {
-    test("Then it should contain a diary in its response", async () => {
+    test("Then it should contain a diary in its response, with a single entry", async () => {
       const response = await request(app)
         .get("/diary/all")
         .set("Authorization", `Bearer ${mockToken}`);
 
       const searchedProperty = "diary";
+      const expectedLength = 1;
       expect(response.body).toHaveProperty(searchedProperty);
+      expect(response.body.diary).toHaveLength(expectedLength);
     });
   });
 });
