@@ -7,11 +7,12 @@ const mockUser = {
 };
 
 const mockToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ2hhbXBhZ25lIiwic3VybmFtZSI6IlBhcGkiLCJ1c2VybmFtZSI6ImVsYXlhcyIsImlhdCI6MTY1NDA4NDM1M30.jVRRrjo0Fc3a6fti4HXpOWS8_rW-5IdtJ3HdwugvLGc";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0Mjg0NjUyfQ.mJSMLapcKXOUZVe6VlTwZFyMfv5e9UcVfoWrLLBZ980";
 
 const mockDiary = {
-  diary: [
+  entries: [
     {
+      username: "marta",
       vitality: 4,
       positiveEmotion: 10,
       engagement: 4,
@@ -24,6 +25,7 @@ const mockDiary = {
       commentary: "Had a good day at the office. Excited on what is coming",
     },
     {
+      username: "marta",
       vitality: 9,
       positiveEmotion: 3,
       engagement: 8,
