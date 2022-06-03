@@ -10,7 +10,6 @@ const mockToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ2hhbXBhZ25lIiwic3VybmFtZSI6IlBhcGkiLCJ1c2VybmFtZSI6ImVsYXlhcyIsImlhdCI6MTY1NDA4NDM1M30.jVRRrjo0Fc3a6fti4HXpOWS8_rW-5IdtJ3HdwugvLGc";
 
 const mockDiary = {
-  username: "elayas",
   diary: [
     {
       vitality: 4,
