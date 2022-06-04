@@ -1,6 +1,5 @@
 require("dotenv").config();
 const debug = require("debug")("bonanza:server:controllers:diary");
-const { default: mongoose } = require("mongoose");
 const { Entry } = require("../../database/models/Diary");
 const User = require("../../database/models/User");
 
