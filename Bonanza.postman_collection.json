@@ -72,6 +72,29 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Delete entry",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0MDc2NDQxfQ.7AA12R_lvHfOYQ_njan3vej8qlOJ7M0i0VhxLDxDsP4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}diary/delete",
+          "host": ["{{origin}}diary"],
+          "path": ["delete"]
+        }
+      },
+      "response": []
     }
   ]
 }

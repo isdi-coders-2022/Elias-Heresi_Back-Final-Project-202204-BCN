@@ -7,12 +7,12 @@ const getEntries = async (req, res) => {
   const {
     userId: { username },
   } = req;
-  const { diary } = await User.findOne({ username });
+  const diary = await User.findOne({ username });
   if (!diary) {
-    res.status(403).json({ msg: "User entries not found" });
+    res.status(403).json({ msg: "User not found" });
     return;
   }
-  const entries = await Entry.find({ _id: diary });
+  const entries = await Entry.find({ _id: diary.diary });
   debug(`${username}'s entries obtained successfully`);
   res.status(201).json({ entries });
 };
