@@ -23,7 +23,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  diary: [{ type: SchemaTypes.ObjectId, ref: "Entry" }],
+  diary: { type: [SchemaTypes.ObjectId], ref: "Entry", default: [] },
 });
 
 const User = model("User", UserSchema, "users");
