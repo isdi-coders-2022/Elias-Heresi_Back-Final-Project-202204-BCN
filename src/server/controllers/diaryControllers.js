@@ -48,7 +48,19 @@ const deleteEntry = async (req, res) => {
 };
 
 const createEntry = async (req, res) => {
-  res.status(201).json({ msg: "The entry was created successfully" });
+  const {
+    userId: { username },
+  } = req;
+
+  const { body: entry } = req;
+
+  const { id } = await Entry.create({ username, ...entry });
+  await User.updateOne({ username }, { $push: { diary: id } });
+
+  debug(`Entry was successfully added to ${username}'s diary`);
+  res
+    .status(201)
+    .json({ msg: `The entry was successfully created in ${username}'s diary` });
 };
 
 module.exports = { getEntries, deleteEntry, createEntry };
