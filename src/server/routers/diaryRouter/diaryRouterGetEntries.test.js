@@ -114,7 +114,7 @@ describe("Given the GET /all diary router", () => {
     });
   });
   describe("When the user doesn't exist", () => {
-    test("Then a response with a status 403 will be received", async () => {
+    test("Then a response with the message 'User not found' will be received", async () => {
       const response = await request(app)
         .get("/diary/all")
         .set("Authorization", `Bearer ${alternativeToken}`);

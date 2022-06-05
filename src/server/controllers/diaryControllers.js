@@ -47,4 +47,8 @@ const deleteEntry = async (req, res) => {
   res.status(201).json({ msg: "Entry was deleted successfully" });
 };
 
-module.exports = { getEntries, deleteEntry };
+const createEntry = async (req, res) => {
+  res.status(201).json({ msg: "The entry was created successfully" });
+};
+
+module.exports = { getEntries, deleteEntry, createEntry };
