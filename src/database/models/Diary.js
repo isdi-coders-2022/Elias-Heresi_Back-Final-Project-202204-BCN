@@ -1,6 +1,10 @@
 const { Schema, model } = require("mongoose");
 
 const EntrySchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

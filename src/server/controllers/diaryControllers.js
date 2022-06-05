@@ -47,4 +47,28 @@ const deleteEntry = async (req, res) => {
   res.status(201).json({ msg: "Entry was deleted successfully" });
 };
 
-module.exports = { getEntries, deleteEntry };
+const createEntry = async (req, res, next) => {
+  try {
+    const {
+      userId: { username },
+    } = req;
+
+    const { body: entry } = req;
+
+    const createdEntry = await Entry.create({ username, ...entry });
+
+    await User.updateOne({ username }, { $push: { diary: createdEntry.id } });
+
+    debug(`Entry was successfully added to ${username}'s diary`);
+    res.status(201).json({
+      msg: `The entry was successfully created in ${username}'s diary`,
+    });
+  } catch (error) {
+    debug("Entry couldn't be created");
+    error.message = "Error creating entry";
+    error.code = 403;
+    next(error);
+  }
+};
+
+module.exports = { getEntries, deleteEntry, createEntry };

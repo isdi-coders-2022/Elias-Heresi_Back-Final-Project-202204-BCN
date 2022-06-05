@@ -2,14 +2,14 @@ const request = require("supertest");
 const { mongoose } = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const app = require("../..");
-const { mockToken, alternativeToken } = require("../../mocks/diary");
+const { mockToken } = require("../../mocks/diary");
 const User = require("../../../database/models/User");
 const { Entry } = require("../../../database/models/Diary");
 const connectDB = require("../../../database");
 
 let mongoServer;
 let users;
-let inputtedEntries;
+let existingEntries;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
@@ -19,9 +19,8 @@ beforeAll(async () => {
 beforeEach(async () => {
   await User.create(users[0]);
   await User.create(users[1]);
-  await Entry.create(inputtedEntries[0]);
-  await Entry.create(inputtedEntries[1]);
-  await Entry.create(inputtedEntries[2]);
+  await Entry.create(existingEntries[0]);
+  await Entry.create(existingEntries[1]);
 });
 
 afterEach(async () => {
@@ -34,7 +33,7 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
-describe("Given the GET /all diary router", () => {
+describe("Given the POST / diary router", () => {
   users = [
     {
       name: "test",
@@ -45,23 +44,22 @@ describe("Given the GET /all diary router", () => {
       diary: [
         mongoose.Types.ObjectId("507f1f77bcf86cd799439011"),
         mongoose.Types.ObjectId("507f1f77bcf86cd799439012"),
-        mongoose.Types.ObjectId("507f1f77bcf86cd799439013"),
       ],
     },
     {
       name: "test 1",
       surname: "mene",
-      username: "sindresmaster",
-      password: "$2a$10$4iHWHlFBQ/1VbzyQ0B5tj.C78eC.msM1NL7wL3nrdkTT8IBfFRQ3a",
+      username: "test",
+      password: "$2b$10$04ih6gHPryUl3PN6as12bOa/YyTNH4uXpcFdnCGq9zsPclM3Z/BWG",
       email: "fontex9@hotmail.com",
       diary: [],
     },
   ];
 
-  inputtedEntries = [
+  existingEntries = [
     {
+      username: "marta",
       _id: mongoose.Types.ObjectId("507f1f77bcf86cd799439011"),
-      username: "marta",
       vitality: 1,
       positiveEmotion: 1,
       engagement: 2,
@@ -73,21 +71,8 @@ describe("Given the GET /all diary router", () => {
       commentary: "Hola",
     },
     {
+      username: "marta",
       _id: mongoose.Types.ObjectId("507f1f77bcf86cd799439012"),
-      username: "marta",
-      vitality: 1,
-      positiveEmotion: 1,
-      engagement: 2,
-      relationships: 3,
-      meaning: 4,
-      accomplishment: 5,
-      wellBeing: 4,
-      image: "img",
-      commentary: "Hola",
-    },
-    {
-      _id: mongoose.Types.ObjectId("507f1f77bcf86cd799439013"),
-      username: "marta",
       vitality: 1,
       positiveEmotion: 1,
       engagement: 2,
@@ -99,8 +84,26 @@ describe("Given the GET /all diary router", () => {
       commentary: "Hola",
     },
   ];
-  describe("When it receives a valid request", () => {
-    test("Then a response containing 3 diary entries will be received, each having the properties of vitality, date and image", async () => {
+  describe("When it receives a request to add a new entry to martas's diary", () => {
+    test("Then user marta's diary will increase to 3 entries", async () => {
+      const requestBody = {
+        date: "12/11/2020",
+        vitality: 1,
+        positiveEmotion: 1,
+        engagement: 2,
+        relationships: 3,
+        meaning: 4,
+        accomplishment: 5,
+        wellBeing: 4,
+        image: "img",
+        commentary: "New entry",
+      };
+
+      await request(app)
+        .post("/diary/")
+        .set("Authorization", `Bearer ${mockToken}`)
+        .send(requestBody);
+
       const {
         body: { entries },
       } = await request(app)
@@ -108,23 +111,8 @@ describe("Given the GET /all diary router", () => {
         .set("Authorization", `Bearer ${mockToken}`);
 
       const expectedLength = 3;
-      const expectedProperties = ["vitality", "date", "image"];
 
       expect(entries).toHaveLength(expectedLength);
-      expect(entries[2]).toHaveProperty(expectedProperties[0]);
-      expect(entries[2]).toHaveProperty(expectedProperties[1]);
-      expect(entries[2]).toHaveProperty(expectedProperties[2]);
-    });
-  });
-  describe("When the user doesn't exist", () => {
-    test("Then a response with the message 'User not found' will be received", async () => {
-      const response = await request(app)
-        .get("/diary/all")
-        .set("Authorization", `Bearer ${alternativeToken}`);
-
-      const expectedProperty = "msg";
-      const expectedMessage = "User not found";
-      expect(response.body).toHaveProperty(expectedProperty, expectedMessage);
     });
   });
 });
