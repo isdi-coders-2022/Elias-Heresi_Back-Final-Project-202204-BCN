@@ -61,6 +61,7 @@ const createEntry = async (req, res, next) => {
 
     debug(`Entry was successfully added to ${username}'s diary`);
     res.status(201).json({
+      id: createdEntry.id,
       msg: `The entry was successfully created in ${username}'s diary`,
     });
   } catch (error) {
