@@ -1,6 +1,6 @@
 const { Joi } = require("express-validation");
 
-const credentialsEntrySchema = {
+const credentialsCreateEntrySchema = {
   body: Joi.object({
     date: Joi.date().required(),
     vitality: Joi.number().integer().min(0).max(10).required(),
@@ -15,4 +15,4 @@ const credentialsEntrySchema = {
   }),
 };
 
-module.exports = { credentialsEntrySchema };
+module.exports = { credentialsCreateEntrySchema };

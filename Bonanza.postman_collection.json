@@ -13,7 +13,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"name\": \"John\", \r\n    \"surname\": \"Wayne\",\r\n    \"email\": \"john@gmail.com\",\r\n    \"username\": \"john-wayne\", \r\n    \"password\": \"1234\"\r\n}",
+          "raw": "{\r\n    \"name\": \"Champagne\", \r\n    \"surname\": \"Papi\",\r\n    \"email\": \"test@papi.com\",\r\n    \"username\": \"usuario-test\", \r\n    \"password\": \"1234\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -58,7 +58,7 @@
           "bearer": [
             {
               "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0MDc2NDQxfQ.7AA12R_lvHfOYQ_njan3vej8qlOJ7M0i0VhxLDxDsP4",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0NTk1NzQwfQ.ZQXt4qHmjZghI2hJlxJAWIc0-ZBCGHGuZiAaq0srE7M",
               "type": "string"
             }
           ]
@@ -81,17 +81,89 @@
           "bearer": [
             {
               "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0MDc2NDQxfQ.7AA12R_lvHfOYQ_njan3vej8qlOJ7M0i0VhxLDxDsP4",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0MzQ1ODg4fQ.k4SrkXU4Z-rGn6oyG24Wez0C8yRMuFk_mooo7RFjUxc",
               "type": "string"
             }
           ]
         },
         "method": "DELETE",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"entryId\": \"629a4a6e5a8e5b7744a72599\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": {
           "raw": "{{origin}}diary/delete",
           "host": ["{{origin}}diary"],
           "path": ["delete"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create entry",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0MzQ1ODg4fQ.k4SrkXU4Z-rGn6oyG24Wez0C8yRMuFk_mooo7RFjUxc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"date\":\"12/11/2021\",\r\n\"vitality\":8,\r\n\"positiveEmotion\":8,\r\n\"engagement\":8,\r\n\"meaning\":9,\r\n\"accomplishment\":9,\r\n\"relationships\":9,\r\n\"wellBeing\":8,\r\n\"commentary\": \"New tested entry\",\r\n\"image\": \"Random-image\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}diary",
+          "host": ["{{origin}}diary"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Edit entry",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0NTk1NzQwfQ.ZQXt4qHmjZghI2hJlxJAWIc0-ZBCGHGuZiAaq0srE7M",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"date\": \"12/11/2021\",\r\n\"vitality\": 9,\r\n\"positiveEmotion\": 2,\r\n\"engagement\": 5,\r\n\"relationships\": 3,\r\n\"meaning\": 8,\r\n\"accomplishment\": 6,\r\n\"wellBeing\": 6,\r\n\"image\": \"https://i.ytimg.com/vi/k01TfYl2IKg/hqdefault.jpg\",\r\n\"commentary\": \"Sí edita\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}diary/edit/629a4a615a8e5b7744a72598",
+          "host": ["{{origin}}diary"],
+          "path": ["edit", "629a4a615a8e5b7744a72598"]
         }
       },
       "response": []
