@@ -28,6 +28,10 @@ const getEntryById = async (req, res) => {
     return;
   }
   const entry = await Entry.findOne({ _id: id });
+  if (!entry) {
+    res.status(403).json({ msg: "Entry not found" });
+    return;
+  }
   debug(`${username}'s entries obtained successfully`);
   res.status(201).json({ entry });
 };
