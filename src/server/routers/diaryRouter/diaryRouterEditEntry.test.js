@@ -93,4 +93,28 @@ describe("Given the PATCH /edit/:entryId diary router", () => {
       expect(entries[0]).toEqual(expectedEntry);
     });
   });
+  describe("When it receives a request to edit the entry 507f1f77bcf86cd799439011", () => {
+    test("Then marta's diary will contain only this entry", async () => {
+      const entryId = "507f1f77bcf86cd799439011";
+
+      await request(app)
+        .patch(`/diary/edit/${entryId}`)
+        .set("Authorization", `Bearer ${mockToken}`)
+        .send(requestBody);
+
+      const {
+        body: { entries },
+      } = await request(app)
+        .get("/diary/all")
+        .set("Authorization", `Bearer ${mockToken}`);
+
+      const expectedEntry = {
+        ...requestBody,
+        id: inputtedEntry._id.toString(),
+        username: user.username,
+      };
+
+      expect(entries[0]).toEqual(expectedEntry);
+    });
+  });
 });
