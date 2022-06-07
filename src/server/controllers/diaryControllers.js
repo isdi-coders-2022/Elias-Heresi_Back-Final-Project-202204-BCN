@@ -72,4 +72,26 @@ const createEntry = async (req, res, next) => {
   }
 };
 
-module.exports = { getEntries, deleteEntry, createEntry };
+const editEntry = async (req, res, next) => {
+  try {
+    const {
+      userId: { username },
+      params: { entryId },
+      body: modifiedEntry,
+    } = req;
+    debug(entryId);
+    debug(modifiedEntry);
+    await Entry.findByIdAndUpdate(entryId, modifiedEntry);
+    debug(`Entry was successfully edited in ${username}'s diary`);
+    res.status(201).json({
+      msg: `The entry was successfully modified in ${username}'s diary`,
+    });
+  } catch (error) {
+    debug("Entry couldn't be edited");
+    error.message = "Error editing entry";
+    error.code = 403;
+    next(error);
+  }
+};
+
+module.exports = { getEntries, deleteEntry, createEntry, editEntry };
