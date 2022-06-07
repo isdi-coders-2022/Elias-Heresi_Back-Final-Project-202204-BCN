@@ -5,6 +5,7 @@ const {
   deleteEntry,
   createEntry,
   editEntry,
+  getEntryById,
 } = require("../../controllers/diaryControllers");
 const {
   credentialsCreateEntrySchema,
@@ -13,6 +14,7 @@ const {
 const diaryRouter = express.Router();
 
 diaryRouter.get("/all", getEntries);
+diaryRouter.get("/byId/:id", getEntryById);
 diaryRouter.delete("/delete", deleteEntry);
 diaryRouter.post("/", validate(credentialsCreateEntrySchema), createEntry);
 diaryRouter.patch(
