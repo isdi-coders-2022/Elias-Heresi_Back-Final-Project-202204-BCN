@@ -8,7 +8,6 @@ const {
 } = require("../../controllers/diaryControllers");
 const {
   credentialsCreateEntrySchema,
-  credentialsEditEntrySchema,
 } = require("../../schemas/diaryCredentialsSchema");
 
 const diaryRouter = express.Router();
@@ -18,7 +17,7 @@ diaryRouter.delete("/delete", deleteEntry);
 diaryRouter.post("/", validate(credentialsCreateEntrySchema), createEntry);
 diaryRouter.patch(
   "/edit/:entryId",
-  validate(credentialsEditEntrySchema),
+  validate(credentialsCreateEntrySchema),
   editEntry
 );
 
