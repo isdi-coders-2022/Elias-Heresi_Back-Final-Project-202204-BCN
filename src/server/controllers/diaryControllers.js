@@ -17,12 +17,24 @@ const getEntries = async (req, res) => {
   res.status(201).json({ entries });
 };
 
+const getEntryById = async (req, res) => {
+  const {
+    userId: { username },
+    params: { id },
+  } = req;
+  const diary = await User.findOne({ username });
+  if (!diary) {
+    res.status(403).json({ msg: "User not found" });
+    return;
+  }
+  const entry = await Entry.findOne({ _id: id });
+  debug(`${username}'s entries obtained successfully`);
+  res.status(201).json({ entry });
+};
+
 const deleteEntry = async (req, res) => {
   const {
     userId: { username },
-  } = req;
-
-  const {
     body: { entryId },
   } = req;
 
@@ -51,9 +63,8 @@ const createEntry = async (req, res, next) => {
   try {
     const {
       userId: { username },
+      body: entry,
     } = req;
-
-    const { body: entry } = req;
 
     const createdEntry = await Entry.create({ username, ...entry });
 
@@ -92,4 +103,10 @@ const editEntry = async (req, res, next) => {
   }
 };
 
-module.exports = { getEntries, deleteEntry, createEntry, editEntry };
+module.exports = {
+  getEntries,
+  getEntryById,
+  deleteEntry,
+  createEntry,
+  editEntry,
+};
