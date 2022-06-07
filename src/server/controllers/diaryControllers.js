@@ -79,8 +79,6 @@ const editEntry = async (req, res, next) => {
       params: { entryId },
       body: modifiedEntry,
     } = req;
-    debug(entryId);
-    debug(modifiedEntry);
     await Entry.findByIdAndUpdate(entryId, modifiedEntry);
     debug(`Entry was successfully edited in ${username}'s diary`);
     res.status(201).json({
