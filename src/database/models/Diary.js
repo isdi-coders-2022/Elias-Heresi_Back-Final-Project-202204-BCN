@@ -59,6 +59,8 @@ const EntrySchema = new Schema({
   },
 });
 
+const NewEntrySchema = new Schema({});
+
 const DiarySchema = new Schema({
   username: {
     type: String,

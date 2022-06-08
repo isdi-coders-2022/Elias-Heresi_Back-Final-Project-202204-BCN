@@ -1,5 +1,6 @@
 require("dotenv").config();
 const debug = require("debug")("bonanza:server:controllers:diary");
+const path = require("path");
 const { Entry } = require("../../database/models/Diary");
 const User = require("../../database/models/User");
 
@@ -68,9 +69,19 @@ const createEntry = async (req, res, next) => {
     const {
       userId: { username },
       body: entry,
+      file,
+      firebaseFileURL,
+      newFilename,
     } = req;
 
-    const createdEntry = await Entry.create({ username, ...entry });
+    const modifiedEntry = {
+      ...entry,
+      username,
+      image: file ? path.join("uploads", "images", newFilename) : "",
+      backup: file ? firebaseFileURL : "",
+    };
+
+    const createdEntry = await Entry.create({ modifiedEntry });
 
     await User.updateOne({ username }, { $push: { diary: createdEntry.id } });
 
