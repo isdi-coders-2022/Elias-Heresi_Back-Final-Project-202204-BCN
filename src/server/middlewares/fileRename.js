@@ -18,8 +18,8 @@ const fileRename = async (req, res, next) => {
       }
     );
     newEntry.image = newFilename;
-    next();
   }
+  next();
 };
 
 module.exports = { fileRename };

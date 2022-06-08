@@ -52,7 +52,6 @@ describe("Given the PATCH /edit/:entryId diary router", () => {
     meaning: 4,
     accomplishment: 5,
     wellBeing: 4,
-    image: "img",
     commentary: "Hola",
   };
 
@@ -65,7 +64,6 @@ describe("Given the PATCH /edit/:entryId diary router", () => {
     meaning: 8,
     accomplishment: 9,
     wellBeing: 6,
-    image: "img",
     commentary: "Esta entrada se logró editar",
   };
 

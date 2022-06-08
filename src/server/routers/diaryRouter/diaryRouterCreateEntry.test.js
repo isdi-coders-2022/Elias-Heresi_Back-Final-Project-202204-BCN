@@ -67,7 +67,6 @@ describe("Given the POST / diary router", () => {
       meaning: 4,
       accomplishment: 5,
       wellBeing: 4,
-      image: "img",
       commentary: "Hola",
     },
     {
@@ -80,7 +79,6 @@ describe("Given the POST / diary router", () => {
       meaning: 4,
       accomplishment: 5,
       wellBeing: 4,
-      image: "img",
       commentary: "Hola",
     },
   ];
@@ -95,7 +93,6 @@ describe("Given the POST / diary router", () => {
         meaning: 4,
         accomplishment: 5,
         wellBeing: 4,
-        image: "img",
         commentary: "New entry",
       };
 
