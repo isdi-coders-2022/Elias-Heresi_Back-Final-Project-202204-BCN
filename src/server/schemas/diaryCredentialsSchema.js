@@ -11,6 +11,7 @@ const credentialsCreateEntrySchema = {
     relationships: Joi.number().integer().min(0).max(10).required(),
     wellBeing: Joi.number().integer().min(0).max(10).required(),
     commentary: Joi.string(),
+    file: Joi.string(),
     image: Joi.string(),
   }),
 };
