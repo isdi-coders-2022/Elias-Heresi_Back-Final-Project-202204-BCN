@@ -3,6 +3,7 @@ const debug = require("debug")("bonanza:server:controllers:diary");
 const path = require("path");
 const { Entry } = require("../../database/models/Diary");
 const User = require("../../database/models/User");
+const convertToAcceptedType = require("../utils/dataConversion");
 
 const getEntries = async (req, res) => {
   const {
@@ -75,14 +76,17 @@ const createEntry = async (req, res, next) => {
     } = req;
 
     const modifiedEntry = {
-      ...entry,
       username,
+      ...entry,
       image: file ? path.join("uploads", "images", newFilename) : "",
       backup: file ? firebaseFileURL : "",
     };
 
-    const createdEntry = await Entry.create({ modifiedEntry });
+    debug(modifiedEntry);
 
+    const createdEntry = await Entry.create(modifiedEntry);
+
+    debug(createdEntry);
     await User.updateOne({ username }, { $push: { diary: createdEntry.id } });
 
     debug(`Entry was successfully added to ${username}'s diary`);

@@ -26,7 +26,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 const fileRename = async (req, res, next) => {
-  const { file, body: newEntry } = req;
+  const { file } = req;
   if (file) {
     const newFilename = `${Date.now()}-${file.originalname}`;
     await fs.rename(
@@ -39,7 +39,7 @@ const fileRename = async (req, res, next) => {
           customError.statusCode = 401;
           next(customError);
         }
-        fs.readFile(
+        await fs.readFile(
           path.join("uploads", "images", newFilename),
           async (readError, readFile) => {
             if (readError) {
@@ -47,23 +47,24 @@ const fileRename = async (req, res, next) => {
             }
             const storage = getStorage(firebaseApp);
             const storageRef = ref(storage, newFilename);
-            debug(storageRef);
 
             await uploadBytes(storageRef, readFile);
             const firebaseFileURL = await getDownloadURL(storageRef);
 
             req.firebaseFileURL = firebaseFileURL;
-            req.newFilename = newFilename;
             debug(chalk.green("Succesfully uploaded file to firebase"));
-            next();
+            req.newFilename = newFilename;
+            debug(chalk.green("Succesfully renamed file"));
+            if (firebaseFileURL) {
+              next();
+            }
           }
         );
       }
     );
-    newEntry.image = newFilename;
-    debug(chalk.green("Succesfully renamed file"));
+  } else {
+    next();
   }
-  next();
 };
 
 module.exports = { fileRename };

@@ -54,12 +54,13 @@ const EntrySchema = new Schema({
   image: {
     type: String,
   },
+  backup: {
+    type: String,
+  },
   commentary: {
     type: String,
   },
 });
-
-const NewEntrySchema = new Schema({});
 
 const DiarySchema = new Schema({
   username: {
