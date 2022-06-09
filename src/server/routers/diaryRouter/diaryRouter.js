@@ -18,6 +18,11 @@ diaryRouter.get("/byId/:id", getEntryById);
 diaryRouter.delete("/delete", deleteEntry);
 diaryRouter.post("/", upload.single("image"), fileRename, createEntry);
 
-diaryRouter.patch("/edit/:entryId", fileRename, editEntry);
+diaryRouter.patch(
+  "/edit/:entryId",
+  upload.single("image"),
+  fileRename,
+  editEntry
+);
 
 module.exports = { diaryRouter };
