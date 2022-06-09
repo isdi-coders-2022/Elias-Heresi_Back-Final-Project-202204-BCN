@@ -54,6 +54,9 @@ const EntrySchema = new Schema({
   image: {
     type: String,
   },
+  backup: {
+    type: String,
+  },
   commentary: {
     type: String,
   },

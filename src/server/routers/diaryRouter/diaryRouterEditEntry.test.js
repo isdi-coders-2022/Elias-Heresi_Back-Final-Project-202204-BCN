@@ -65,6 +65,8 @@ describe("Given the PATCH /edit/:entryId diary router", () => {
     accomplishment: 9,
     wellBeing: 6,
     commentary: "Esta entrada se logró editar",
+    image: "",
+    backup: "",
   };
 
   describe("When it receives a request to edit the entry 507f1f77bcf86cd799439011", () => {
@@ -86,6 +88,8 @@ describe("Given the PATCH /edit/:entryId diary router", () => {
         ...requestBody,
         id: inputtedEntry._id.toString(),
         username: user.username,
+        backup: "",
+        image: "",
       };
 
       expect(entries[0]).toEqual(expectedEntry);
