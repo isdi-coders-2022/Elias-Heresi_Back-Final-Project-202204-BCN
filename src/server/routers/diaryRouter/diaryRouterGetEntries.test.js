@@ -99,27 +99,27 @@ describe("Given the GET /all diary router", () => {
       commentary: "Hola",
     },
   ];
-  describe("When it receives a valid request", () => {
-    test("Then a response containing 3 diary entries will be received, each having the properties of vitality, date and image", async () => {
+  describe("When it receives a valid request with 2 perPage", () => {
+    test("Then a response containing 1 diary entry will be received, each having the properties of vitality, date and image", async () => {
       const {
         body: { entries },
       } = await request(app)
-        .get("/diary/all")
+        .get("/diary/all?perPage=1&page=1")
         .set("Authorization", `Bearer ${mockToken}`);
 
-      const expectedLength = 3;
+      const expectedLength = 1;
       const expectedProperties = ["vitality", "date", "image"];
 
       expect(entries).toHaveLength(expectedLength);
-      expect(entries[2]).toHaveProperty(expectedProperties[0]);
-      expect(entries[2]).toHaveProperty(expectedProperties[1]);
-      expect(entries[2]).toHaveProperty(expectedProperties[2]);
+      expect(entries[0]).toHaveProperty(expectedProperties[0]);
+      expect(entries[0]).toHaveProperty(expectedProperties[1]);
+      expect(entries[0]).toHaveProperty(expectedProperties[2]);
     });
   });
   describe("When the user doesn't exist", () => {
     test("Then a response with the message 'User not found' will be received", async () => {
       const response = await request(app)
-        .get("/diary/all")
+        .get("/diary/all?perPage=20&page=0")
         .set("Authorization", `Bearer ${alternativeToken}`);
 
       const expectedProperty = "msg";

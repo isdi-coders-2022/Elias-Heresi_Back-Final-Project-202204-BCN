@@ -16,14 +16,27 @@ const getEntries = async (req, res) => {
 
   const page = +(req.query?.page || 0);
   const perPage = +(req.query?.perPage || 10);
-  debug(page);
-  debug(perPage);
 
   const entries = await Entry.find({ _id: diary.diary })
     .skip(page * perPage)
     .limit(perPage);
   debug(`${username}'s entries obtained successfully`);
-  res.status(201).json({ entries });
+
+  const numberOfEntries = diary.diary.length;
+
+  let nextPageRoute = null;
+  let previousPageRoute = null;
+  if (perPage * (page + 1) < numberOfEntries) {
+    const nextPage = page + 1;
+    nextPageRoute = `${process.env.LOCAL_API_URL}diary/all?perPage=${perPage}&page=${nextPage}`;
+  }
+  if (page > 0) {
+    const previousPage = page - 1;
+    previousPageRoute = `${process.env.LOCAL_API_URL}diary/all?perPage=${perPage}&page=${previousPage}`;
+  }
+
+  const pagination = { previous: previousPageRoute, next: nextPageRoute };
+  res.status(201).json({ entries, pagination });
 };
 
 const getEntryById = async (req, res) => {
