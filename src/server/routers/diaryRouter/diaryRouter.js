@@ -10,8 +10,12 @@ const {
 } = require("../../controllers/diaryControllers");
 const { fileRename } = require("../../middlewares/fileRename");
 
+const maxSize = 1000000;
 const diaryRouter = express.Router();
-const upload = multer({ dest: path.join("uploads", "images") });
+const upload = multer({
+  dest: path.join("uploads", "images"),
+  limits: { fileSize: maxSize },
+});
 
 diaryRouter.get("/all", getEntries);
 diaryRouter.get("/byId/:id", getEntryById);

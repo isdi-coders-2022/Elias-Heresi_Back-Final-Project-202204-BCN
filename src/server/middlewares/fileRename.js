@@ -10,10 +10,6 @@ const {
   getDownloadURL,
 } = require("firebase/storage");
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAhNC0Ockd0v4be8BFfZyz6O8rHc1ANfIY",
   authDomain: "bonanza-8814d.firebaseapp.com",
@@ -27,6 +23,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 const fileRename = async (req, res, next) => {
   const { file } = req;
+  debug(file);
   if (file) {
     const newFilename = `${Date.now()}-${file.originalname}`;
     await fs.rename(
