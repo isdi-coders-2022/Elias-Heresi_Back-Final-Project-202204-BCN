@@ -23,7 +23,6 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 const fileRename = async (req, res, next) => {
   const { file } = req;
-  debug(file);
   if (file) {
     const newFilename = `${Date.now()}-${file.originalname}`;
     await fs.rename(
@@ -36,6 +35,7 @@ const fileRename = async (req, res, next) => {
           customError.statusCode = 401;
           next(customError);
         }
+
         await fs.readFile(
           path.join("uploads", "images", newFilename),
           async (readError, readFile) => {
