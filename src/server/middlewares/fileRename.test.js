@@ -14,7 +14,7 @@ jest.mock("firebase/storage", () => ({
 
 describe("Given the fileRename function", () => {
   describe("When invoked with an image", () => {
-    test("Then the image will have been renamed", async () => {
+    test("Then the next function won't be called", async () => {
       const next = jest.fn();
       fs.rename.mockImplementation((oldpath, newpath, callback) => {
         callback();

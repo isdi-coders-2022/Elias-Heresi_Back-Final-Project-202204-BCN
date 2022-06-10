@@ -13,7 +13,15 @@ const getEntries = async (req, res) => {
     res.status(403).json({ msg: "User not found" });
     return;
   }
-  const entries = await Entry.find({ _id: diary.diary });
+
+  const page = +(req.query?.page || 0);
+  const perPage = +(req.query?.perPage || 10);
+  debug(page);
+  debug(perPage);
+
+  const entries = await Entry.find({ _id: diary.diary })
+    .skip(page * perPage)
+    .limit(perPage);
   debug(`${username}'s entries obtained successfully`);
   res.status(201).json({ entries });
 };
