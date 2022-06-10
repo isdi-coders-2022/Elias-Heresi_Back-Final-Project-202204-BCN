@@ -25,6 +25,7 @@ const fileRename = async (req, res, next) => {
   const { file } = req;
   if (file) {
     const newFilename = `${Date.now()}-${file.originalname}`;
+
     await fs.rename(
       path.join("uploads", "images", file.filename),
       path.join("uploads", "images", newFilename),
