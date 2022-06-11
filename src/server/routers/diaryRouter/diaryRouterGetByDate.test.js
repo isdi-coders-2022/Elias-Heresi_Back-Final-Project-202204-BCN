@@ -6,7 +6,6 @@ const { mockToken, alternativeToken } = require("../../mocks/diary");
 const User = require("../../../database/models/User");
 const { Entry } = require("../../../database/models/Diary");
 const connectDB = require("../../../database");
-const { convertToDate } = require("../../utils/convertToDate");
 
 let mongoServer;
 let users;
