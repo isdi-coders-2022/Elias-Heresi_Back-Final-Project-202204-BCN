@@ -7,6 +7,7 @@ const {
   createEntry,
   editEntry,
   getEntryById,
+  filterEntriesByDate,
 } = require("../../controllers/diaryControllers");
 const { fileRename } = require("../../middlewares/fileRename");
 
@@ -21,6 +22,7 @@ diaryRouter.get("/all", getEntries);
 diaryRouter.get("/byId/:id", getEntryById);
 diaryRouter.delete("/delete", deleteEntry);
 diaryRouter.post("/", upload.single("image"), fileRename, createEntry);
+diaryRouter.get("/date", filterEntriesByDate);
 
 diaryRouter.patch(
   "/edit/:entryId",
