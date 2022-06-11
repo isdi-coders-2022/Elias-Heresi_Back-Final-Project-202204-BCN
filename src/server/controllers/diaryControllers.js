@@ -3,6 +3,7 @@ const debug = require("debug")("bonanza:server:controllers:diary");
 const path = require("path");
 const { Entry } = require("../../database/models/Diary");
 const User = require("../../database/models/User");
+const { convertToDate } = require("../utils/convertToDate");
 
 const getEntries = async (req, res) => {
   const {
@@ -37,6 +38,34 @@ const getEntries = async (req, res) => {
 
   const pagination = { previous: previousPageRoute, next: nextPageRoute };
   res.status(201).json({ entries, pagination });
+};
+
+const filterEntriesByDate = async (req, res, next) => {
+  try {
+    const {
+      userId: { username },
+    } = req;
+
+    const startDate = convertToDate(req.query?.startDate || 19000101);
+    const endDate = convertToDate(req.query?.endDate || 21000101);
+
+    const diary = await User.findOne({ username });
+    if (!diary) {
+      res.status(403).json({ msg: "User not found" });
+      return;
+    }
+    const entries = await Entry.find({
+      _id: diary.diary,
+      date: { $gt: startDate, $lt: endDate },
+    });
+
+    res.status(201).json({ entries });
+  } catch (error) {
+    debug("Entries couldn't be fetched");
+    error.message = "Error fetching entry";
+    error.code = 403;
+    next(error);
+  }
 };
 
 const getEntryById = async (req, res) => {
@@ -156,4 +185,5 @@ module.exports = {
   deleteEntry,
   createEntry,
   editEntry,
+  filterEntriesByDate,
 };
