@@ -43,8 +43,8 @@
           }
         },
         "url": {
-          "raw": "{{origin}}user/login",
-          "host": ["{{origin}}user"],
+          "raw": "{{render}}user/login",
+          "host": ["{{render}}user"],
           "path": ["login"]
         }
       },
@@ -66,9 +66,19 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{origin}}diary/all",
+          "raw": "{{origin}}diary/all?perPage=1&page=2",
           "host": ["{{origin}}diary"],
-          "path": ["all"]
+          "path": ["all"],
+          "query": [
+            {
+              "key": "perPage",
+              "value": "1"
+            },
+            {
+              "key": "page",
+              "value": "2"
+            }
+          ]
         }
       },
       "response": []
@@ -121,17 +131,69 @@
         "method": "POST",
         "header": [],
         "body": {
-          "mode": "raw",
-          "raw": "{\"date\":\"12/11/2021\",\r\n\"vitality\":8,\r\n\"positiveEmotion\":8,\r\n\"engagement\":8,\r\n\"meaning\":9,\r\n\"accomplishment\":9,\r\n\"relationships\":9,\r\n\"wellBeing\":8,\r\n\"commentary\": \"New tested entry\",\r\n\"image\": \"Random-image\"}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/C:/Users/Stelios/Downloads/Kylo.png"
+            },
+            {
+              "key": "date",
+              "value": "12/11/2021",
+              "type": "text"
+            },
+            {
+              "key": "vitality",
+              "value": "6",
+              "type": "text"
+            },
+            {
+              "key": "positiveEmotion",
+              "value": "6",
+              "type": "text"
+            },
+            {
+              "key": "engagement",
+              "value": "60",
+              "type": "text"
+            },
+            {
+              "key": "relationships",
+              "value": "6",
+              "type": "text"
+            },
+            {
+              "key": "meaning",
+              "value": "6",
+              "type": "text"
+            },
+            {
+              "key": "accomplishment",
+              "value": "7",
+              "type": "text"
+            },
+            {
+              "key": "wellBeing",
+              "value": "8",
+              "type": "text"
+            },
+            {
+              "key": "commentary",
+              "value": "Huge value",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "value": "efowiefj",
+              "type": "text",
+              "disabled": true
             }
-          }
+          ]
         },
         "url": {
-          "raw": "{{origin}}diary",
-          "host": ["{{origin}}diary"]
+          "raw": "{{render}}diary",
+          "host": ["{{render}}diary"]
         }
       },
       "response": []
@@ -152,18 +214,87 @@
         "method": "PATCH",
         "header": [],
         "body": {
-          "mode": "raw",
-          "raw": "{\"date\": \"12/11/2021\",\r\n\"vitality\": 9,\r\n\"positiveEmotion\": 2,\r\n\"engagement\": 5,\r\n\"relationships\": 3,\r\n\"meaning\": 8,\r\n\"accomplishment\": 6,\r\n\"wellBeing\": 6,\r\n\"image\": \"https://i.ytimg.com/vi/k01TfYl2IKg/hqdefault.jpg\",\r\n\"commentary\": \"Sí edita\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": []
+            },
+            {
+              "key": "date",
+              "value": "10/8/2020",
+              "type": "text"
+            },
+            {
+              "key": "positiveEmotion",
+              "value": "8",
+              "type": "text"
+            },
+            {
+              "key": "engagement",
+              "value": "8",
+              "type": "text"
+            },
+            {
+              "key": "relationships",
+              "value": "8",
+              "type": "text"
+            },
+            {
+              "key": "meaning",
+              "value": "8",
+              "type": "text"
+            },
+            {
+              "key": "accomplishment",
+              "value": "8",
+              "type": "text"
+            },
+            {
+              "key": "vitality",
+              "value": "8",
+              "type": "text"
+            },
+            {
+              "key": "wellBeing",
+              "value": "8",
+              "type": "text"
+            },
+            {
+              "key": "commentary",
+              "value": "Edición de entrada",
+              "type": "text"
             }
-          }
+          ]
         },
         "url": {
-          "raw": "{{origin}}diary/edit/629a4a615a8e5b7744a72598",
+          "raw": "{{render}}diary/edit/629f4161c5c3da86b2c167f7",
+          "host": ["{{render}}diary"],
+          "path": ["edit", "629f4161c5c3da86b2c167f7"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Entry by Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0MzQ1ODg4fQ.k4SrkXU4Z-rGn6oyG24Wez0C8yRMuFk_mooo7RFjUxc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}diary/byId/629a4a615a8e5b7744a72598",
           "host": ["{{origin}}diary"],
-          "path": ["edit", "629a4a615a8e5b7744a72598"]
+          "path": ["byId", "629a4a615a8e5b7744a72598"]
         }
       },
       "response": []
