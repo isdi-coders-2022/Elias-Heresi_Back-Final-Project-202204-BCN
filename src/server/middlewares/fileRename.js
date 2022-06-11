@@ -46,7 +46,11 @@ const fileRename = async (req, res, next) => {
             const storage = getStorage(firebaseApp);
             const storageRef = ref(storage, newFilename);
 
-            await uploadBytes(storageRef, readFile);
+            const metadata = {
+              contentType: "image",
+            };
+
+            await uploadBytes(storageRef, readFile, metadata);
             const firebaseFileURL = await getDownloadURL(storageRef);
 
             req.firebaseFileURL = firebaseFileURL;

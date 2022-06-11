@@ -99,7 +99,7 @@ describe("Given the GET /all diary router", () => {
       commentary: "Hola",
     },
   ];
-  describe("When it receives a valid request with 2 perPage", () => {
+  describe("When it receives a valid request with 1 perPage", () => {
     test("Then a response containing 1 diary entry will be received, each having the properties of vitality, date and image", async () => {
       const {
         body: { entries },
