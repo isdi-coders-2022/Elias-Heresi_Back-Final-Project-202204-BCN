@@ -40,6 +40,49 @@ const getEntries = async (req, res) => {
   res.status(201).json({ entries, pagination });
 };
 
+const getUserEntries = async (req, res) => {
+  const {
+    userId: { username },
+  } = req;
+  const diary = await User.findOne({ username });
+  if (!diary) {
+    res.status(403).json({ msg: "User not found" });
+    return;
+  }
+
+  const page = +(req.query?.page || 0);
+  const perPage = +(req.query?.perPage || 100);
+
+  const startDateAsNumber = req.query?.startDate || "19000101";
+  const endDateAsNumber = req.query?.endDate || "21000101";
+  const startDate = convertToDate(startDateAsNumber);
+  const endDate = convertToDate(endDateAsNumber);
+
+  const entries = await Entry.find({
+    _id: diary.diary,
+    date: { $gt: startDate, $lt: endDate },
+  })
+    .skip(page * perPage)
+    .limit(perPage);
+  debug(`${username}'s entries obtained successfully`);
+
+  const numberOfEntries = diary.diary.length;
+
+  let nextPageRoute = null;
+  let previousPageRoute = null;
+  if (perPage * (page + 1) < numberOfEntries) {
+    const nextPage = page + 1;
+    nextPageRoute = `${process.env.LOCAL_API_URL}diary/all?perPage=${perPage}&page=${nextPage}&startDate=${startDateAsNumber}&endDate=${endDateAsNumber}`;
+  }
+  if (page > 0) {
+    const previousPage = page - 1;
+    previousPageRoute = `${process.env.LOCAL_API_URL}diary/all?perPage=${perPage}&page=${previousPage}&startDate=${startDateAsNumber}&endDate=${endDateAsNumber}`;
+  }
+
+  const pagination = { previous: previousPageRoute, next: nextPageRoute };
+  res.status(201).json({ numberOfEntries, entries, pagination });
+};
+
 const filterEntriesByDate = async (req, res, next) => {
   try {
     const {
@@ -186,4 +229,5 @@ module.exports = {
   createEntry,
   editEntry,
   filterEntriesByDate,
+  getUserEntries,
 };

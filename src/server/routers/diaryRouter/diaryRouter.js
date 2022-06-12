@@ -8,6 +8,7 @@ const {
   editEntry,
   getEntryById,
   filterEntriesByDate,
+  getUserEntries,
 } = require("../../controllers/diaryControllers");
 const { fileRename } = require("../../middlewares/fileRename");
 
@@ -19,6 +20,7 @@ const upload = multer({
 });
 
 diaryRouter.get("/all", getEntries);
+diaryRouter.get("/entries", getUserEntries);
 diaryRouter.get("/byId/:id", getEntryById);
 diaryRouter.delete("/delete", deleteEntry);
 diaryRouter.post("/", upload.single("image"), fileRename, createEntry);
