@@ -4,13 +4,11 @@
 
 - POST ('user/register/'): Register a new user to the database
 - POST ('user/login/'): Login a user to the network, delivering a token
-- GET ('diary/all'): Obtain a complete list of the user's entries
-- GET ('diary/all?page=X?perPage=Y'): Obtain a Y entries, of X page number of the user's entries
+- GET ('diary/entries?startDate=X&endDate=Y&page=X&perPage=Y'): Obtain a complete list of the user's entries, with optional parameters of date filters and pagination
 - DELETE ('diary/delete): Delete diary entry from database
 - POST ('diary/): Post new entry to database
 - PATCH ('diary/edit/:entryId): Edit diary entry from database
 - GET ('diary/byId/:entryId'): Get detailed information for pageId
-- GET ('diary/?startDate=X?endDate=Y'): Obtain entries between X and Y dates
 - GET ('diary/detail/:id'): Obtain detailed information of entry
 
 ## **Database structure**

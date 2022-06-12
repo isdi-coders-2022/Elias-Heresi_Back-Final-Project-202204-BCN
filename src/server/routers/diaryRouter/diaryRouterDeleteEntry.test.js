@@ -112,7 +112,7 @@ describe("Given the DELETE /delete diary router", () => {
       const {
         body: { entries },
       } = await request(app)
-        .get("/diary/all")
+        .get("/diary/entries")
         .set("Authorization", `Bearer ${mockToken}`);
 
       const expectedLength = 2;

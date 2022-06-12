@@ -104,7 +104,7 @@ describe("Given the GET /all diary router", () => {
       const {
         body: { entries },
       } = await request(app)
-        .get("/diary/all?perPage=1&page=1")
+        .get("/diary/entries?perPage=1&page=1")
         .set("Authorization", `Bearer ${mockToken}`);
 
       const expectedLength = 1;
@@ -119,7 +119,7 @@ describe("Given the GET /all diary router", () => {
   describe("When the user doesn't exist", () => {
     test("Then a response with the message 'User not found' will be received", async () => {
       const response = await request(app)
-        .get("/diary/all?perPage=20&page=0")
+        .get("/diary/entries?perPage=20&page=0")
         .set("Authorization", `Bearer ${alternativeToken}`);
 
       const expectedProperty = "msg";

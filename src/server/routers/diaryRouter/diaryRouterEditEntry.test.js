@@ -81,7 +81,7 @@ describe("Given the PATCH /edit/:entryId diary router", () => {
       const {
         body: { entries },
       } = await request(app)
-        .get("/diary/all")
+        .get("/diary/entries")
         .set("Authorization", `Bearer ${mockToken}`);
 
       const expectedEntry = {
@@ -107,7 +107,7 @@ describe("Given the PATCH /edit/:entryId diary router", () => {
       const {
         body: { entries },
       } = await request(app)
-        .get("/diary/all")
+        .get("/diary/entries")
         .set("Authorization", `Bearer ${mockToken}`);
 
       const expectedEntry = {
