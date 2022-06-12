@@ -94,14 +94,14 @@ describe("Given the GET /all diary router", () => {
     },
   ];
 
-  const startDate = 20100101;
-  const endDate = 20210101;
+  const startDate = "20100101";
+  const endDate = "20210101";
   describe("When it receives a valid request startDate 2010 and endDate 2021", () => {
     test("Then a response containing 1 diary entry will be received", async () => {
       const {
         body: { entries },
       } = await request(app)
-        .get(`/diary/date?startDate=${startDate}&endDate=${endDate}`)
+        .get(`/diary/entries?startDate=${startDate}&endDate=${endDate}`)
         .set("Authorization", `Bearer ${mockToken}`);
 
       const expectedLength = 1;
@@ -112,7 +112,7 @@ describe("Given the GET /all diary router", () => {
   describe("When the user doesn't exist", () => {
     test("Then a response with the message 'User not found' will be received", async () => {
       const response = await request(app)
-        .get(`/diary/date?startDate=${startDate}&endDate=${endDate}`)
+        .get(`/diary/entries?startDate=${startDate}&endDate=${endDate}`)
         .set("Authorization", `Bearer ${alternativeToken}`);
 
       const expectedProperty = "msg";
