@@ -23,6 +23,11 @@ const getUserEntries = async (req, res) => {
   const startDate = convertToDate(startDateAsNumber);
   const endDate = convertToDate(endDateAsNumber);
 
+  const numberOfEntries = await Entry.count({
+    _id: diary.diary,
+    date: { $gt: startDate, $lt: endDate },
+  });
+
   const entries = await Entry.find({
     _id: diary.diary,
     date: { $gt: startDate, $lt: endDate },
@@ -30,8 +35,7 @@ const getUserEntries = async (req, res) => {
     .skip(page * perPage)
     .limit(perPage);
   debug(`${username}'s entries obtained successfully`);
-
-  const numberOfEntries = diary.diary.length;
+  debug(numberOfEntries);
 
   let nextPageRoute = null;
   let previousPageRoute = null;
