@@ -1,5 +1,6 @@
 require("dotenv").config();
 const debug = require("debug")("bonanza:server:controllers:diary");
+const { endOfDay, startOfDay } = require("date-fns");
 const path = require("path");
 const { Entry } = require("../../database/models/Diary");
 const User = require("../../database/models/User");
@@ -25,12 +26,12 @@ const getUserEntries = async (req, res) => {
 
   const numberOfEntries = await Entry.count({
     _id: diary.diary,
-    date: { $gt: startDate, $lt: endDate },
+    date: { $gte: startOfDay(startDate), $lte: endOfDay(endDate) },
   });
 
   const entries = await Entry.find({
     _id: diary.diary,
-    date: { $gt: startDate, $lt: endDate },
+    date: { $gte: startOfDay(startDate), $lte: endOfDay(endDate) },
   })
     .skip(page * perPage)
     .limit(perPage);
