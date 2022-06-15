@@ -66,19 +66,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{origin}}diary/all?perPage=1&page=2",
-          "host": ["{{origin}}diary"],
-          "path": ["all"],
-          "query": [
-            {
-              "key": "perPage",
-              "value": "1"
-            },
-            {
-              "key": "page",
-              "value": "2"
-            }
-          ]
+          "raw": "{{render}}diary/entries",
+          "host": ["{{render}}diary"],
+          "path": ["entries"]
         }
       },
       "response": []
@@ -206,7 +196,7 @@
           "bearer": [
             {
               "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0NTk1NzQwfQ.ZQXt4qHmjZghI2hJlxJAWIc0-ZBCGHGuZiAaq0srE7M",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0MzQ1ODg4fQ.k4SrkXU4Z-rGn6oyG24Wez0C8yRMuFk_mooo7RFjUxc",
               "type": "string"
             }
           ]
@@ -295,6 +285,80 @@
           "raw": "{{origin}}diary/byId/629a4a615a8e5b7744a72598",
           "host": ["{{origin}}diary"],
           "path": ["byId", "629a4a615a8e5b7744a72598"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Entries by date",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0MzQ1ODg4fQ.k4SrkXU4Z-rGn6oyG24Wez0C8yRMuFk_mooo7RFjUxc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}diary/entries?startDate=20210101&endDate=20220601",
+          "host": ["{{origin}}diary"],
+          "path": ["entries"],
+          "query": [
+            {
+              "key": "startDate",
+              "value": "20210101"
+            },
+            {
+              "key": "endDate",
+              "value": "20220601"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Paginated entries by date",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFydGEiLCJzdXJuYW1lIjoiQW1pZ2EiLCJ1c2VybmFtZSI6Im1hcnRhIiwiaWF0IjoxNjU0MzQ1ODg4fQ.k4SrkXU4Z-rGn6oyG24Wez0C8yRMuFk_mooo7RFjUxc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}diary/entries?startDate=20210101&endDate=20220605&perPage=1&page=0",
+          "host": ["{{origin}}diary"],
+          "path": ["entries"],
+          "query": [
+            {
+              "key": "startDate",
+              "value": "20210101"
+            },
+            {
+              "key": "endDate",
+              "value": "20220605"
+            },
+            {
+              "key": "perPage",
+              "value": "1"
+            },
+            {
+              "key": "page",
+              "value": "0"
+            }
+          ]
         }
       },
       "response": []
